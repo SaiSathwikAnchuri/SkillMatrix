@@ -1,7 +1,9 @@
 // src/api/axios.js
 import axios from 'axios';
 
-const api = axios.create({ baseURL: '/api' });
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'https://skillmatrix-uk1t.onrender.com/api').replace(/\/$/, '');
+
+const api = axios.create({ baseURL: API_BASE_URL });
 
 api.interceptors.request.use(cfg => {
   const token = localStorage.getItem('skillmatrix_token');
