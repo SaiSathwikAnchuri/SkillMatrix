@@ -13,8 +13,20 @@ connectDB();
 // ── Security Middleware ─────────────────────────────────────────
 app.use(helmet());
 
+// Allowed frontend origins
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://skill--matrix.vercel.app"
+];
+
 app.use(cors({
-  origin: process.env.CLIENT_URL,
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS not allowed"));
+    }
+  },
   credentials: true
 }));
 
@@ -37,7 +49,7 @@ const authLimiter = rateLimit({
 app.use('/api/', limiter);
 app.use('/api/auth/', authLimiter);
 
-// ── Root Route (Fixes "Cannot GET /") ───────────────────────────
+// ── Root Route ──────────────────────────────────────────────────
 app.get('/', (req, res) => {
   res.send('🚀 SkillMatrix Backend API is running');
 });
@@ -48,7 +60,7 @@ app.use('/api/jobs', require('./routes/jobs'));
 app.use('/api/submissions', require('./routes/submissions').router);
 app.use('/api/recruiter', require('./routes/recruiter'));
 
-// ── Health Check Endpoint ───────────────────────────────────────
+// ── Health Check ────────────────────────────────────────────────
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
