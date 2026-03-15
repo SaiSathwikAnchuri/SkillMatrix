@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body { font-family: 'DM Sans', sans-serif; @apply text-navy bg-white; }
+  h1,h2,h3,h4,h5 { font-family: 'Sora', sans-serif; }
+}
+
+@layer components {
+  .card { @apply bg-white rounded-2xl border border-teal-light shadow-sm; }
+  .card-hover { @apply hover:-translate-y-1 hover:shadow-lg hover:border-teal transition-all duration-300; }
+  .btn-primary { @apply bg-teal text-white font-sora font-semibold px-6 py-3 rounded-xl hover:bg-navy transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg; }
+  .btn-outline { @apply border-2 border-teal text-teal font-sora font-semibold px-6 py-3 rounded-xl hover:bg-teal hover:text-white transition-all duration-200; }
+  .btn-ghost { @apply text-teal font-semibold px-4 py-2 rounded-lg hover:bg-teal-light transition-colors; }
+  .input { @apply w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal transition-all; }
+  .label { @apply block text-sm font-medium text-gray-700 mb-1.5; }
+  .tag { @apply inline-block bg-teal-light text-teal text-xs font-mono font-medium px-3 py-1 rounded-full tracking-wide uppercase; }
+  .anon-id { @apply font-mono text-sm text-teal bg-teal-xlight px-2.5 py-1 rounded-md; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #F0FAFB; }
+::-webkit-scrollbar-thumb { background: #0D7C8E40; border-radius: 3px; }
+
+/* Progress bar animation */
+.progress-bar { transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
